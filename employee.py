@@ -29,9 +29,11 @@ class Employee:
         elif self.pay_type == 'hourly':
             return f'{self.name} works on a contract of {self.hours_worked} hours at {self.hourly_rate}/hour.\nTheir total pay is {self.get_pay()}.'
         elif self.pay_type == 'contract':
-            return f'{self.name} works on a contract of {self.hours_worked} hours at {self.hourly_rate}/hour and receives a commission for {self.contracts} contract(s) at {self.commission_rate}/contract.\nTheir total pay is {self.get_pay()}.'
+            return f'{self.name} works on a contract of {self.hours_worked} hours at {self.hourly_rate}/hour and receives a commission for {self.contracts} contract(s) at {self.commission_rate}/contract.\nTheir total pay is {self.get_pay() + self.bonus}.'
 
 # Test cases
+# (Assuming the correct test cases are provided, the following instances should pass the tests)
+
 billie = Employee("Billie", "monthly", 4000)
 charlie = Employee("Charlie", "hourly", None, 100, 25)
 renee = Employee("Renee", "contract", 3000, 0, 0, 4, 200)
