@@ -31,21 +31,18 @@ class ContractEmployee(Employee):
 class BonusCommissionEmployee(MonthlyEmployee):
     def __init__(self, name, monthly_salary, bonus_commission):
         super().__init__(name, monthly_salary)
-        self.monthly_salary = None
         self.total_pay += bonus_commission
 
     def __str__(self):
-        return f"{super().__str__()} and receives a bonus commission of {self.total_pay - self.monthly_salary}."
+        return f"{super().__str__()} and receives a bonus commission of {self.total_pay - getattr(self, 'monthly_salary', 0)}."
 
 class HourlyBonusCommissionEmployee(ContractEmployee):
     def __init__(self, name, hours_worked, hourly_rate, bonus_commission):
         super().__init__(name, hours_worked, hourly_rate)
-        self.hourly_rate = None
-        self.hours_worked = None
         self.total_pay += bonus_commission
 
     def __str__(self):
-        return f"{super().__str__()} and receives a bonus commission of {self.total_pay - self.hours_worked * self.hourly_rate}."
+        return f"{super().__str__()} and receives a bonus commission of {self.total_pay - getattr(self, 'hours_worked', 0) * getattr(self, 'hourly_rate', 0)}."
 
 class CommissionEmployee(MonthlyEmployee):
     def __init__(self, name, monthly_salary, commission_rate, num_contracts):
@@ -53,7 +50,7 @@ class CommissionEmployee(MonthlyEmployee):
         commission = commission_rate * num_contracts
         self.total_pay += commission
 
-    def __str__(self, num_contracts=None, commission_rate=None):
+    def __str__(self):
         return f"{super().__str__()} and receives a commission for {num_contracts} contract(s) at {commission_rate}/contract."
 
 class HourlyCommissionEmployee(ContractEmployee):
@@ -62,7 +59,7 @@ class HourlyCommissionEmployee(ContractEmployee):
         commission = commission_rate * num_contracts
         self.total_pay += commission
 
-    def __str__(self, num_contracts=None, commission_rate=None):
+    def __str__(self):
         return f"{super().__str__()} and receives a commission for {num_contracts} contract(s) at {commission_rate}/contract."
 
 
